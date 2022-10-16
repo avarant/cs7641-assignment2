@@ -56,7 +56,7 @@ random = Random()
 random.setSeed(42)
 
 
-def run(algo_name, problem_name, ef, iters=5000, trials=10):
+def run(algo_name, problem_name, ef, iters=10000, trials=10):
     for t in range(1, trials+1):
         odd = DiscretePermutationDistribution(N)
         nf = SwapNeighbor()
