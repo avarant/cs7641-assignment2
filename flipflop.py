@@ -43,24 +43,24 @@ def run(algo_funcname, iters=10000, trials=10):
 
         if algo_funcname == "RHC":
             rhc = RandomizedHillClimbing(hcp)
-            algo_funcfunc = rhc
+            algo_func = rhc
         elif algo_funcname == "SA":
             sa = SimulatedAnnealing(100, .95, hcp)
-            algo_funcfunc = sa
+            algo_func = sa
         elif algo_funcname == "GA":
             gap = GenericGeneticAlgorithmProblem(ef, odd, mf, cf)
             ga = StandardGeneticAlgorithm(200, 100, 20, gap)
-            algo_funcfunc = ga
+            algo_func = ga
         elif algo_funcname == "MIMIC":
             pop = GenericProbabilisticOptimizationProblem(ef, odd, df)
             mimic = MIMIC(200, 5, pop)
-            algo_funcfunc = mimic
+            algo_func = mimic
         else:
             return
 
         # ef.resetFunctionEvaluationCount()
-        # fit = ConvergenceTrainer(algo_funcfunc)
-        fit = FixedIterationTrainer(algo_funcfunc, 10)
+        # fit = ConvergenceTrainer(algo_func)
+        fit = FixedIterationTrainer(algo_func, 10)
         FILE_NAME="{}_{}_{}.csv".format(algo_funcname, problem_name, str(t))
         OUTPUT_FILE = os.path.join("results/csv", FILE_NAME)
         with open(OUTPUT_FILE, "wb") as results:
@@ -68,11 +68,11 @@ def run(algo_funcname, iters=10000, trials=10):
             writer.writerow(["iters","fevals","fitness"])
             for i in range(0, iters, 10):
                 fit.train()
-                #print str(i) + ", " + str(ef.getFunctionEvaluations()) + ", " + str(ef.value(algo_funcfunc.getOptimal()))
-                writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_funcfunc.getOptimal())])
+                #print str(i) + ", " + str(ef.getFunctionEvaluations()) + ", " + str(ef.value(algo_func.getOptimal()))
+                writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_func.getOptimal())])
         
         print algo_funcname + " trial #" + str(t)
-        print algo_funcname + ": " + str(ef.value(algo_funcfunc.getOptimal()))
+        print algo_funcname + ": " + str(ef.value(algo_func.getOptimal()))
         print "Function Evaluations: " + str(ef.getFunctionEvaluations()-iters)
         print "Iters: " + str(iters)
         print "####"

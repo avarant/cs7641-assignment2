@@ -43,13 +43,14 @@ random = Random()
 random.setSeed(42)
 
 def run(algo_funcname, iters=10000, trials=10):
+    problem_name = "continuouspeaks"
+
     N=60
     T=N/10
     fill = [2] * N
     ranges = array('i', fill)
 
     ef = ContinuousPeaksEvaluationFunction(T)
-    problem_name = "continuouspeaks"
 
     for t in range(1, trials+1):
         odd = DiscreteUniformDistribution(ranges)
@@ -63,24 +64,24 @@ def run(algo_funcname, iters=10000, trials=10):
 
         if algo_funcname == "RHC":
             rhc = RandomizedHillClimbing(hcp)
-            algo_funcfunc = rhc
+            algo_func = rhc
         elif algo_funcname == "SA":
             sa = SimulatedAnnealing(1E11, .95, hcp)
-            algo_funcfunc = sa
+            algo_func = sa
         elif algo_funcname == "GA":
             gap = GenericGeneticAlgorithmProblem(ef, odd, mf, cf)
             ga = StandardGeneticAlgorithm(200, 100, 10, gap)
-            algo_funcfunc = ga
+            algo_func = ga
         elif algo_funcname == "MIMIC":
             pop = GenericProbabilisticOptimizationProblem(ef, odd, df)
             mimic = MIMIC(200, 20, pop)
-            algo_funcfunc = mimic
+            algo_func = mimic
         else:
             return
 
-        # ef.resetFunctionEvaluationCount()
-        # fit = ConvergenceTrainer(algo_funcfunc)
-        fit = FixedIterationTrainer(algo_funcfunc, 10)
+        ef.resetFunctionEvaluationCount()
+        # fit = ConvergenceTrainer(algo_func)
+        fit = FixedIterationTrainer(algo_func, 10)
         times = [0]
 
         FILE_NAME="{}_{}_{}.csv".format(algo_funcname, problem_name, str(t))
@@ -93,11 +94,11 @@ def run(algo_funcname, iters=10000, trials=10):
                 fit.train()
                 duration = time.clock() - start_ts
                 times.append(times[-1] + duration)
-                #print str(i) + ", " + str(ef.getFunctionEvaluations()) + ", " + str(ef.value(algo_funcfunc.getOptimal()))
-                writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_funcfunc.getOptimal()), duration])
+                #print str(i) + ", " + str(ef.getFunctionEvaluations()) + ", " + str(ef.value(algo_func.getOptimal()))
+                writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_func.getOptimal()), duration])
         
         print algo_funcname + " trial #" + str(t)
-        print algo_funcname + ": " + str(ef.value(algo_funcfunc.getOptimal()))
+        print algo_funcname + ": " + str(ef.value(algo_func.getOptimal()))
         print "Function Evaluations: " + str(ef.getFunctionEvaluations()-iters)
         print "Iters: " + str(iters)
         print "####"

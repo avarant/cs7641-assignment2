@@ -87,7 +87,7 @@ def run(algo_name, problem_name, ef, iters=10000, trials=10):
         else:
             return
 
-        # ef.resetFunctionEvaluationCount()
+        ef.resetFunctionEvaluationCount()
         # fit = ConvergenceTrainer(algo_func)
         fit = FixedIterationTrainer(algo_func, 10)
         FILE_NAME="{}_{}_{}.csv".format(algo_name, problem_name, str(t))
