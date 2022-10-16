@@ -1,6 +1,6 @@
 # cs7641-assigment2
 
-This project uses [ABAGAIL Github](https://github.com/pushkar/ABAGAIL) with jython to analyze local random search algorithms, namely randomized hill climbing, simulated annealing, a genetic algorithm, MIMIC.
+This project uses [ABAGAIL](https://github.com/pushkar/ABAGAIL) with jython to analyze local random search algorithms, namely randomized hill climbing, simulated annealing, a genetic algorithm, MIMIC.
 
 
 ## Generating graphs
