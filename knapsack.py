@@ -109,15 +109,20 @@ def run(algo_funcname, iters=10000, trials=10):
         ef.resetFunctionEvaluationCount()
         # fit = ConvergenceTrainer(algo_func)
         fit = FixedIterationTrainer(algo_func, 10)
+        times = [0]
+
         FILE_NAME="{}_{}_{}.csv".format(algo_funcname, problem_name, str(t))
         OUTPUT_FILE = os.path.join("results/csv", FILE_NAME)
         with open(OUTPUT_FILE, "wb") as results:
             writer= csv.writer(results, delimiter=',')
-            writer.writerow(["iters","fevals","fitness"])
+            writer.writerow(["iters","fevals","fitness","times"])
             for i in range(0, iters, 10):
+                start_ts = time.clock()
                 fit.train()
+                duration = time.clock() - start_ts
+                times.append(times[-1] + duration)
                 #print str(i) + ", " + str(ef.getFunctionEvaluations()) + ", " + str(ef.value(algo_func.getOptimal()))
-                writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_func.getOptimal())])
+                writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_func.getOptimal()), times[-1]])
         
         print algo_funcname + " trial #" + str(t)
         print algo_funcname + ": " + str(ef.value(algo_func.getOptimal()))

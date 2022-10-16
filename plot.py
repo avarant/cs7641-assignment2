@@ -44,6 +44,18 @@ def plot_feval_vs_iters(problem):
     fig=sns_plot.get_figure()
     fig.savefig(os.path.join('results/plot', f'{problem}_fevals_v_iters.png'))
 
+def plot_feval_vs_time(problem):
+    plt.clf()
+    algos = ["RHC", "SA", "GA", "MIMIC"]
+    for algo_name in algos:
+        df = get_data(algo_name, problem)
+        sns_plot=sns.lineplot(x="time", y="fevals", data=df, legend="full", label=algo_name)
+    
+    ax = sns_plot.axes
+    ax.legend(loc="best")
+    sns_plot.set_title(f"{problem} Function evaluations vs Iterations")
+    fig=sns_plot.get_figure()
+    fig.savefig(os.path.join('results/plot', f'{problem}_fevals_v_time.png'))
 
 ########################
 
@@ -52,3 +64,4 @@ print(f"Plotting {problem} graphs")
 
 plot_convergence(problem)
 plot_feval_vs_iters(problem)
+# plot_feval_vs_time(problem)

@@ -95,7 +95,7 @@ def run(algo_funcname, iters=10000, trials=10):
                 duration = time.clock() - start_ts
                 times.append(times[-1] + duration)
                 #print str(i) + ", " + str(ef.getFunctionEvaluations()) + ", " + str(ef.value(algo_func.getOptimal()))
-                writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_func.getOptimal()), duration])
+                writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_func.getOptimal()), times[-1]])
         
         print algo_funcname + " trial #" + str(t)
         print algo_funcname + ": " + str(ef.value(algo_func.getOptimal()))
