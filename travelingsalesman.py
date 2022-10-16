@@ -4,7 +4,7 @@ import os
 import time
 import csv
 
-sys.path.append("./ABAGAIL.jar")
+sys.path.append("./ABAGAIL/ABAGAIL.jar")
 
 import java.io.FileReader as FileReader
 import java.io.File as File
@@ -53,8 +53,10 @@ from array import array
 N = 50
 random = Random()
 
+random.setSeed(42)
 
-def run(algo_name, problem_name, ef, iters=10000, trials=10):
+
+def run(algo_name, problem_name, ef, iters=5000, trials=10):
     for t in range(1, trials+1):
         odd = DiscretePermutationDistribution(N)
         nf = SwapNeighbor()
@@ -67,11 +69,11 @@ def run(algo_name, problem_name, ef, iters=10000, trials=10):
             rhc = RandomizedHillClimbing(hcp)
             algo_func = rhc
         elif algo_name == "SA":
-            sa = SimulatedAnnealing(1E12, .999, hcp)
+            sa = SimulatedAnnealing(1E11, .95, hcp)
             algo_func = sa
         elif algo_name == "GA":
             gap = GenericGeneticAlgorithmProblem(ef, odd, mf, cf)
-            ga = StandardGeneticAlgorithm(2000, 1500, 250, gap)
+            ga = StandardGeneticAlgorithm(200, 150, 10, gap)
             algo_func = ga
         elif algo_name == "MIMIC":
             fill = [N] * N
@@ -80,7 +82,7 @@ def run(algo_name, problem_name, ef, iters=10000, trials=10):
             df = DiscreteDependencyTree(.1, ranges)
             pop = GenericProbabilisticOptimizationProblem(ef, odd, df)
             pop = GenericProbabilisticOptimizationProblem(ef, odd, df)
-            mimic = MIMIC(500, 100, pop)
+            mimic = MIMIC(200, 20, pop)
             algo_func = mimic
         else:
             return

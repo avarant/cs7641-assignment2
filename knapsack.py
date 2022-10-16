@@ -3,7 +3,7 @@ import os
 import time
 import csv
 
-sys.path.append("./ABAGAIL.jar")
+sys.path.append("./ABAGAIL/ABAGAIL.jar")
 
 import java.io.FileReader as FileReader
 import java.io.File as File
@@ -40,8 +40,11 @@ import opt.example.KnapsackEvaluationFunction as KnapsackEvaluationFunction
 
 from array import array
 
+
 # Random number generator */
 random = Random()
+random.setSeed(42)
+
 # The number of items
 NUM_ITEMS = 40
 # The number of copies each
@@ -54,7 +57,7 @@ MAX_VOLUME = 50
 KNAPSACK_VOLUME = MAX_VOLUME * NUM_ITEMS * COPIES_EACH * .4
 
 
-def run(algo_funcname, iters=10000, trials=10):
+def run(algo_funcname, iters=5000, trials=10):
     # create copies
     fill = [COPIES_EACH] * NUM_ITEMS
     copies = array('i', fill)
@@ -89,15 +92,15 @@ def run(algo_funcname, iters=10000, trials=10):
             rhc = RandomizedHillClimbing(hcp)
             algo_funcfunc = rhc
         elif algo_funcname == "SA":
-            sa = SimulatedAnnealing(100, .95, hcp)
+            sa = SimulatedAnnealing(1e11, .95, hcp)
             algo_funcfunc = sa
         elif algo_funcname == "GA":
             gap = GenericGeneticAlgorithmProblem(ef, odd, mf, cf)
-            ga = StandardGeneticAlgorithm(200, 150, 25, gap)
+            ga = StandardGeneticAlgorithm(200, 100, 10, gap)
             algo_funcfunc = ga
         elif algo_funcname == "MIMIC":
             pop = GenericProbabilisticOptimizationProblem(ef, odd, df)
-            mimic = MIMIC(200, 100, pop)
+            mimic = MIMIC(200, 20, pop)
             algo_funcfunc = mimic
         else:
             return

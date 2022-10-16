@@ -3,7 +3,7 @@ import os
 import time
 import csv
 
-sys.path.append("./ABAGAIL.jar")
+sys.path.append("./ABAGAIL/ABAGAIL.jar")
 
 import java.io.FileReader as FileReader
 import java.io.File as File
@@ -39,8 +39,10 @@ import opt.example.ContinuousPeaksEvaluationFunction as ContinuousPeaksEvaluatio
 
 from array import array
 
+random = Random()
+random.setSeed(42)
 
-def run(algo_funcname, iters=10000, trials=10):
+def run(algo_funcname, iters=5000, trials=10):
     N=60
     T=N/10
     fill = [2] * N
@@ -79,13 +81,18 @@ def run(algo_funcname, iters=10000, trials=10):
         # ef.resetFunctionEvaluationCount()
         # fit = ConvergenceTrainer(algo_funcfunc)
         fit = FixedIterationTrainer(algo_funcfunc, 10)
+        times = [0]
+
         FILE_NAME="{}_{}_{}.csv".format(algo_funcname, problem_name, str(t))
         OUTPUT_FILE = os.path.join("results/csv", FILE_NAME)
         with open(OUTPUT_FILE, "wb") as results:
             writer= csv.writer(results, delimiter=',')
-            writer.writerow(["iters","fevals","fitness"])
+            writer.writerow(["iters","fevals","fitness","times"])
             for i in range(0, iters, 10):
+                start_ts = time.clock()
                 fit.train()
+                duration = time.clock() - start_ts
+                times.append(times[-1] + duration)
                 #print str(i) + ", " + str(ef.getFunctionEvaluations()) + ", " + str(ef.value(algo_funcfunc.getOptimal()))
                 writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_funcfunc.getOptimal())])
         
@@ -94,8 +101,6 @@ def run(algo_funcname, iters=10000, trials=10):
         print "Function Evaluations: " + str(ef.getFunctionEvaluations()-iters)
         print "Iters: " + str(iters)
         print "####"
-
-
 
 
 run("RHC")

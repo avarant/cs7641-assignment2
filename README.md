@@ -32,6 +32,12 @@ Generate csv results and graphs.
 ```
 
 
+## Problems
+
+- continuouspeaks   | SA
+- knapsack          | MIMIC
+- travelingsalesman | GA
+
 ## Notes
 convergence plot: fitness v iters
 choosing convergence criteria is important
