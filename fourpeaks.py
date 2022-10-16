@@ -94,7 +94,7 @@ def run(algo_funcname, iters=10000, trials=10):
         print "Iters: " + str(iters)
         print "####"
 
-        return algo_funcfunc
+
 
 
 run("RHC")

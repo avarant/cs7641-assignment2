@@ -118,8 +118,6 @@ def run(algo_name, problem_name, ef, iters=10000, trials=10):
                 path.append(algo_func.getOptimal().getDiscrete(x))
             print path
 
-        return algo_func
-
 
 ##################
 
