@@ -34,9 +34,12 @@ Generate csv results and graphs.
 
 ## Problems
 
-- continuouspeaks   | SA
-- knapsack          | MIMIC
-- travelingsalesman | GA
+| Problem      | Optimal algorithm |
+| ----------- | ----------- |
+| continuous peaks     | SA       |
+| knapsack    | MIMIC        |
+| traveling salesman   | GA        |
+
 
 ## Notes
 convergence plot: fitness v iters
