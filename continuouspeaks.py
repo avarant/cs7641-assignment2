@@ -42,7 +42,7 @@ from array import array
 random = Random()
 random.setSeed(42)
 
-def run(algo_funcname, iters=5000, trials=10):
+def run(algo_funcname, iters=10000, trials=10):
     N=60
     T=N/10
     fill = [2] * N
@@ -94,7 +94,7 @@ def run(algo_funcname, iters=5000, trials=10):
                 duration = time.clock() - start_ts
                 times.append(times[-1] + duration)
                 #print str(i) + ", " + str(ef.getFunctionEvaluations()) + ", " + str(ef.value(algo_funcfunc.getOptimal()))
-                writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_funcfunc.getOptimal())])
+                writer.writerow([i, ef.getFunctionEvaluations()-i, ef.value(algo_funcfunc.getOptimal()), duration])
         
         print algo_funcname + " trial #" + str(t)
         print algo_funcname + ": " + str(ef.value(algo_funcfunc.getOptimal()))

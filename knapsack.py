@@ -57,7 +57,7 @@ MAX_VOLUME = 50
 KNAPSACK_VOLUME = MAX_VOLUME * NUM_ITEMS * COPIES_EACH * .4
 
 
-def run(algo_funcname, iters=5000, trials=10):
+def run(algo_funcname, iters=10000, trials=10):
     # create copies
     fill = [COPIES_EACH] * NUM_ITEMS
     copies = array('i', fill)
