@@ -5,6 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import argparse
 
 sns.set_theme(style='darkgrid')
 
@@ -87,11 +88,16 @@ def plot_log_time_vs_iters(problem):
 
 ########################
 
-problem = sys.argv[1]
-print(f"Plotting {problem} graphs")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("problem")
+    args = parser.parse_args()
 
-plot_convergence(problem)
-plot_feval_vs_iters(problem)
-plot_feval_vs_time(problem)
-plot_time_vs_iters(problem)
-plot_log_time_vs_iters(problem)
+    problem = args.problem
+    print(f"Plotting {problem} graphs")
+
+    plot_convergence(problem)
+    plot_feval_vs_iters(problem)
+    plot_feval_vs_time(problem)
+    plot_time_vs_iters(problem)
+    plot_log_time_vs_iters(problem)
