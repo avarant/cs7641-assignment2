@@ -26,18 +26,22 @@ Install packages.
 pip install -r requirements.txt
 ```
 
-Generate csv results and graphs.
+Generate csv results.
 ```
 ./run.sh
 ```
 
+Generate graphs.
+```
+./plot.sh
+```
 
 ## Problems
 
 | Problem      | Optimal algorithm |
-| ----------- | ----------- |
+| ------------ | ----------- |
 | continuous peaks     | SA       |
-| knapsack    | MIMIC        |
+| knapsack     | MIMIC        |
 | traveling salesman   | GA        |
 
 
