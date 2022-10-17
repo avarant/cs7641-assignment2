@@ -10,7 +10,18 @@ This project uses [ABAGAIL](https://github.com/pushkar/ABAGAIL) with jython to a
 4. MIMIC
 
 
-## Generating graphs
+## Problems
+
+| Problem      | Optimal algorithm |
+| ------------ | ----------- |
+| continuous peaks     | SA       |
+| knapsack     | MIMIC        |
+| traveling salesman   | GA        |
+
+
+## Part 1: Generating graphs
+
+Make sure you have java installed.
 
 Install jython. If you're on Ubuntu or another Debian based Linux distro you can run.
 ```
@@ -38,27 +49,16 @@ Generate graphs.
 ./plot.sh
 ```
 
-## Problems
 
-| Problem      | Optimal algorithm |
-| ------------ | ----------- |
-| continuous peaks     | SA       |
-| knapsack     | MIMIC        |
-| traveling salesman   | GA        |
+## Part 2: Generating results for part 2
 
+Train and test a perceptron using RHC, SA and GA
 
-## Notes
-convergence plot: fitness v iters
-choosing convergence criteria is important
+code: `ABAGAIL/src/opt/test/BreastCancerTest.java`
 
-try different problem size and see how performance changes
-does not need to be a plot. table is acceptable
+data: `ABAGAIL/data/`
 
-analyze wallclock time
-fevals per iteration
-fevals per wallclock time
-
-
-for NN
-learning curve
-compare backprop with randomized optimization
+```
+cd ABAGAIL
+java -cp ABAGAIL.jar opt.test.BreastCancerTest
+```
