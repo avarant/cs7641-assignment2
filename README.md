@@ -1,5 +1,7 @@
 # cs7641-assigment2
 
+See https://github.com/avarant/cs7641-assignment2
+
 This project uses [ABAGAIL](https://github.com/pushkar/ABAGAIL) with jython to analyze the following local random search algorithms.
 
 1. randomized hill climbing
