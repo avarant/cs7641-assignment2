@@ -12,14 +12,14 @@ This project uses [ABAGAIL](https://github.com/pushkar/ABAGAIL) with jython to a
 
 ## Problems
 
-| Problem      | Optimal algorithm |
+| problem      | optimal algorithm |
 | ------------ | ----------- |
 | continuous peaks     | SA       |
 | knapsack     | MIMIC        |
 | traveling salesman   | GA        |
 
 
-## Part 1: Generating graphs
+## Generating graphs for part 1 (problems)
 
 Make sure you have java installed.
 
@@ -50,7 +50,7 @@ Generate graphs.
 ```
 
 
-## Part 2: Generating results for part 2
+## Generating results for part 2 (NN)
 
 Train and test a perceptron using RHC, SA and GA
 
